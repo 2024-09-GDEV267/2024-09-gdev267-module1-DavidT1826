@@ -22,9 +22,13 @@ public class ApplePicker : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AppleMissed()
     {
-        
+        //Destory all of the falling Apples
+        GameObject[] appleArray = GameObject.FindGameObjectsWithTag("Apple");
+        foreach (GameObject tempGO in appleArray)
+        {
+            Destroy(tempGO);
+        }
     }
 }

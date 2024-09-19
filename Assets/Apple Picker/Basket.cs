@@ -32,8 +32,9 @@ public class Basket : MonoBehaviour
         //Move the position of this Basket to the x position of the Mouse;
         Vector3 pos = this.transform.position;
         pos.x = mousePos3D.x;
+        pos.y = mousePos3D.y;
         this.transform.position = pos;
-        
+        //Here I was able to make one of the baskets follow the cursor, but I was not able to make the stack do so. 
     }
 
     void OnCollisionEnter(Collision coll)

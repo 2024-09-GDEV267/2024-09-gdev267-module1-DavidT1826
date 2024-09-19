@@ -25,7 +25,6 @@ public class ApplePicker : MonoBehaviour
         }
         
     }
-
     public void AppleMissed()
     {
         //Destory all of the falling Apples

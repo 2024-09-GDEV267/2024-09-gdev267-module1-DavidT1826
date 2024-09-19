@@ -21,6 +21,10 @@ public class AppleTree : MonoBehaviour {
     //Seconds between Apples instantiations
     public float appleDropDelay = 1f;
 
+    public int applesDropped = 0;
+
+    public int waveNum = 1;
+
     // Start is called before the first frame update
     void Start(){
         //Start dropping apples
@@ -30,7 +34,16 @@ public class AppleTree : MonoBehaviour {
     void DropApple() {
         GameObject apple = Instantiate<GameObject>(applePrefab);
         apple.transform.position = transform.position;
-        Invoke("DropApple", appleDropDelay);
+        applesDropped++;
+        if (applesDropped == 10)
+        {
+            NextWave();
+            Invoke("DropApple", appleDropDelay + 2);
+        }
+        else
+        {
+            Invoke("DropApple", appleDropDelay);
+        }
     }
 
     // Update is called once per frame
@@ -58,4 +71,14 @@ public class AppleTree : MonoBehaviour {
             speed *= -1; //Change direction
         }
     }
+
+    private void NextWave()
+    {
+        speed = Mathf.Abs(speed) + 5;
+        applesDropped = 0;
+        waveNum += 1;
+    }
+
+    //I was able to get the tree to briefly stop dropping apples and speed up the tree's movement, but I still don't know
+    //how to get the tree to stop moving entirely (or if that's even possible) or how to make the apples fall faster.
 }

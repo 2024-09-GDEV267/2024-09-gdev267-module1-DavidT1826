@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameMode
 {
@@ -14,9 +15,9 @@ public class MissionDemolition : MonoBehaviour
     static private MissionDemolition S; //a private Singleton
 
     [Header("Set in Inspector")]
-    public TextAlignment uitLevel; //The UIText_Level Text
-    public TextAlignment uitShots; //The UIText_Shots Text
-    public TextAlignment uitButton; //The text on UIButton_View
+    public Text uitLevel; //The UIText_Level Text
+    public Text uitShots; //The UIText_Shots Text
+    public Text uitButton; //The text on UIButton_View
     public Vector3 castlePos; //The place to put castles
     public GameObject[] castles; //An array of the castles
 
@@ -68,13 +69,20 @@ public class MissionDemolition : MonoBehaviour
         mode = GameMode.playing;
     }
 
+    void UpdateGUI()
+    {
+        //Show the data in teh GUITexts
+        uitLevel.text = "Level: " + (level + 1) + " of " + levelMax;
+        uitShots.text = "Shots Taken: " + shotsTaken;
+    }
+
     // Update is called once per frame
     void Update()
     {
         UpdateGUI();
 
         //Check for level end
-        if ((mode == GameMode.player) && Goal.goalMet)
+        if ((mode == GameMode.playing) && Goal.goalMet)
         {
             //Change mode to stop checking for level end
             mode = GameMode.levelEnd;
@@ -97,7 +105,7 @@ public class MissionDemolition : MonoBehaviour
 
     public void SwitchView(string eView = "")
     {
-        if eView == "")
+        if (eView == "")
         {
             eView = uitButton.text;
         }

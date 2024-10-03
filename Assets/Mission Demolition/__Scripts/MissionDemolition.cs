@@ -124,7 +124,7 @@ public class MissionDemolition : MonoBehaviour
 
             case "Show Both":
                 FollowCam.POI = GameObject.Find("ViewBoth");
-                uitButton.text = "Show Singshot";
+                uitButton.text = "Show Slingshot";
                 break;
         }
     }

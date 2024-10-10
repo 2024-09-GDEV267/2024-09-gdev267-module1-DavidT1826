@@ -49,7 +49,7 @@ public class Slingshot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //The playe rhas pressed the mouse button while over Slingshot
+        //The player has pressed the mouse button while over Slingshot
         aimingMode = true;
         //Instantiate a Projectile
         projectile = Instantiate(prefabProjectile) as GameObject;

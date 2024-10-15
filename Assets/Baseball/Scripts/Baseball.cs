@@ -9,7 +9,7 @@ public class Baseball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject ball = Instantiate<GameObject>(ballPrefab);
+        //GameObject ball = Instantiate<GameObject>(ballPrefab);
     }
 
     // Update is called once per frame

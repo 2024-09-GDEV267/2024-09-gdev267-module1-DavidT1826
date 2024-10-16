@@ -6,7 +6,8 @@ public class Bat : MonoBehaviour
 {
     [Header("Set in Inspector")]
     public GameObject ballPrefab;
-    public float ballVelocity = 4f;
+    public GameObject ball;
+    public float ballVelocity;
 
     [Header("Set Dynamically")]
     public GameObject holdingPoint;
@@ -14,18 +15,19 @@ public class Bat : MonoBehaviour
     public bool swingMode;
     private Rigidbody ballRigidbody;
     public Vector3 mouseDelta;
+    public Vector3 launchVector = new Vector3();
     void Awake()
     {
         Transform holdingPointTrans = transform.Find("HoldingPoint");
         holdingPoint = holdingPointTrans.gameObject;
         holdingPoint.SetActive(false);
         holdPos = holdingPointTrans.position;
-        
+        print(ballVelocity);
     }
 
     private void OnMouseDown()
     {
-        GameObject ball = Instantiate<GameObject>(ballPrefab);
+        ball = Instantiate<GameObject>(ballPrefab);
         swingMode = true;
         ballRigidbody = ball.GetComponent<Rigidbody>();
     }
@@ -58,6 +60,19 @@ public class Bat : MonoBehaviour
         {
             swingMode = false;
 
+        }
+    }
+
+    private void OnCollisionEnter(Collision coll)
+    {
+        GameObject collidedWith = coll.gameObject;
+        if (collidedWith.CompareTag("Ball"))
+        {
+            launchVector.x = Random.value * 5;
+            launchVector.y = Random.value * 5;
+            ballVelocity = Random.value * 10;
+            ballRigidbody.velocity = (launchVector * ballVelocity);
+            TrackCamera.POI = ball;
         }
     }
 }

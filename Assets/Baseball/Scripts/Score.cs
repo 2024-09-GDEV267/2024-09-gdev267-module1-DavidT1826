@@ -6,11 +6,18 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     static public int score = 0;
+    public Text gt;
+
+    private void Awake()
+    {
+        gt = this.GetComponent<Text>();
+    }
 
     private void Update()
     {
-        Text gt = this.GetComponent<Text>();
+        print(gt);
         gt.text = "Score: " + score;
+        
     }
 
 }
